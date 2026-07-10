@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "note": "このマスタは完成させるものではなく、Gemini判定でis_new_project=trueが返るたびに自動追記され、運用しながら育てるものです。",
+  "projects": [
+    { "id": "Hakko", "aliases": ["Hakko", "HAKKO", "八光", "八光株式会社"], "active": true },
+    { "id": "Key", "aliases": ["Key", "KEY"], "active": true },
+    { "id": "茂原", "aliases": ["茂原"], "active": true },
+    { "id": "KUMIKAE", "aliases": ["KUMIKAE", "組換", "くみかえ"], "active": true },
+    { "id": "YGIC", "aliases": ["YGIC", "Yokohama Global Incubation Center"], "active": true },
+    { "id": "エムスリー", "aliases": ["エムスリー", "M3", "株式会社エムスリー"], "active": true },
+    { "id": "あすか信組", "aliases": ["あすか信組", "あすか信用組合"], "active": true },
+    { "id": "Path-Flow", "aliases": ["Path-Flow", "PathFlow", "パスフロー", "sensei.pathflow.org"], "active": true },
+    { "id": "金田屋", "aliases": ["金田屋", "金田屋創菓"], "active": true },
+    { "id": "たんぽぽ石油", "aliases": ["たんぽぽ石油"], "active": true }
+  ]
+}
