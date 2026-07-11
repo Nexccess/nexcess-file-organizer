@@ -1,4 +1,88 @@
 {
+  "version": "2.0",
+  "note": "クライアント＞案件の親子構造。未確定・未分類はis_new_project運用で随時追加。完成を前提としない。",
+  "clients": [
+    {
+      "client": "あすか信組",
+      "aliases": ["あすか信組", "あすか信用組合"],
+      "major": "経営コンサル",
+      "middle": "調達コンサル",
+      "projects": [
+        { "id": "たんぽぽ石油", "aliases": ["たんぽぽ石油"] }
+      ]
+    },
+    {
+      "client": "ワイズエーシー",
+      "aliases": ["ワイズエーシー", "ワイズエーシー株式会社"],
+      "major": "経営コンサル",
+      "middle": "調達コンサル",
+      "projects": []
+    },
+    {
+      "client": "LCグループ",
+      "aliases": ["LCグループ", "LC Holdings"],
+      "major": "経営コンサル",
+      "middle": "企業再生",
+      "projects": [
+        { "id": "ゼーレマン", "aliases": ["ゼーレマン"] },
+        { "id": "金田屋", "aliases": ["金田屋", "金田屋創菓"] },
+        { "id": "Pets", "aliases": ["Pets"] },
+        { "id": "LCD", "aliases": ["LCD"] },
+        { "id": "LCI", "aliases": ["LCI"] },
+        { "id": "LCS", "aliases": ["LCS"] }
+      ]
+    },
+    {
+      "client": "エムスリー",
+      "aliases": ["エムスリー", "M3", "株式会社エムスリー"],
+      "major": "経営コンサル",
+      "middle": "ハンズオン型",
+      "projects": []
+    },
+    {
+      "client": "Hakko",
+      "aliases": ["Hakko", "HAKKO", "八光", "八光株式会社"],
+      "major": "訴訟関連",
+      "middle": "自社",
+      "projects": []
+    },
+    {
+      "client": "Key",
+      "aliases": ["Key", "KEY"],
+      "major": "訴訟関連",
+      "middle": "自社（旧社）",
+      "projects": []
+    },
+    {
+      "client": "茂原",
+      "aliases": ["茂原"],
+      "major": "訴訟関連",
+      "middle": "コンサル先案件",
+      "projects": []
+    },
+    {
+      "client": "Path-Flow",
+      "aliases": ["Path-Flow", "PathFlow", "パスフロー", "sensei.pathflow.org"],
+      "major": "自社プロダクト",
+      "middle": "Web関連",
+      "projects": []
+    },
+    {
+      "client": "KUMIKAE",
+      "aliases": ["KUMIKAE", "組換", "くみかえ"],
+      "major": "自社プロダクト",
+      "middle": "Web関連",
+      "projects": []
+    },
+    {
+      "client": "YGIC",
+      "aliases": ["YGIC", "横浜"],
+      "major": "自社プロダクト",
+      "middle": "シェアオフィス事業",
+      "projects": []
+    }
+  ]
+}
   "version": "1.0",
   "note": "このマスタは完成させるものではなく、Gemini判定でis_new_project=trueが返るたびに自動追記され、運用しながら育てるものです。",
   "projects": [
