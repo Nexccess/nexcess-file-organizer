@@ -18,17 +18,17 @@
 //   "folderMaster": { ...フォルダ構造マスタJSON... }
 // }
 //
-// レスポンス形式（Phase2確定スキーマ）:
+// レスポンス形式（v2.0：クライアント＞案件の親子構造に対応）:
 // {
 //   "major": string,
 //   "middle": string,
-//   "minor": string,
-//   "project": string,
-//   "is_new_project": boolean,
+//   "client": string,
+//   "project": string,       // 案件名。存在しない場合は空文字列
+//   "is_new_client": boolean,
 //   "date": "YYYYMMDD",
 //   "doc_type": string,
 //   "title": string,
-//   "new_filename": string,
+//   "new_filename": string,  // 枝番なし。連番はPAD側で付与
 //   "confidence": number,
 //   "reason": string
 // }
@@ -40,29 +40,38 @@ const SYSTEM_PROMPT = `あなたはファイル分類の専門エンジンです
 
 【役割】
 入力されたファイル情報（ファイル名・抽出テキストまたは画像/音声内容・更新日時）から、
-案件マスタに定義された案件IDへの分類、文書種別の判定、リネーム用ファイル名の生成を行う。
+案件マスタ（クライアント＞案件の親子構造）への分類、文書種別の判定、
+リネーム用ファイル名の生成を行う。
+
+【案件マスタの構造】
+マスタは "clients" 配列を持つ。各クライアントは major（大項目）・middle（中項目）・
+aliases（表記揺れ）・projects（配下の個別案件、空配列の場合はクライアント＝案件）を持つ。
+例：クライアント「あすか信組」の配下に案件「たんぽぽ石油」が存在する場合、
+    書類の内容が「たんぽぽ石油」に関するものであれば、client="あすか信組", project="たんぽぽ石油" とする。
+    projectsが空のクライアント（例：ワイズエーシー、Hakko）は、project は空文字列とする。
 
 【厳守事項】
-1. 案件マスタ（提供リスト）に類似・一致する案件が存在する場合は、必ずそのidを使用すること（表記揺れは統合すること）。
-2. 案件マスタに存在しない新規の案件・会社名と判断される場合は、is_new_project を true とし、
-   project にはファイル内容から読み取れる会社名・案件名をそのまま記載すること。
-   （新規案件を無理に既存マスタへ当てはめてはならない）
-3. 判定根拠となる情報が不十分な場合は、confidence を0.5未満とし、project は "unknown" とすること。
-4. major/middleの値は、フォルダ構造マスタに定義された値のみを使用すること。
-   ただし新規案件の場合、middleは project と同一の値を提案してよい。
+1. 案件マスタに類似・一致するクライアント/案件が存在する場合は、必ずそのidを使用すること（表記揺れは統合すること）。
+2. 案件マスタに存在しない新規のクライアント・会社名と判断される場合は、is_new_client を true とし、
+   client にはファイル内容から読み取れる会社名をそのまま記載すること。
+   （新規クライアントを無理に既存マスタへ当てはめてはならない）
+3. 判定根拠となる情報が不十分な場合は、confidence を0.5未満とし、client は "unknown" とすること。
+4. major/middleの値は、既存クライアントに一致した場合はそのクライアントのmajor/middleを使用すること。
+   新規クライアントの場合は、内容から合理的に推定される値を提案してよい。
 5. dateはファイル内のテキスト・音声内容から読み取れる文書作成日を優先し、
    読み取れない場合は提供された更新日時を使用すること。
-6. new_filename は "YYYYMMDD_案件名_書面名.拡張子" の形式とすること（枝番は付与しない。
-   枝番は後段のPAD側で連番採番するため、ここでは含めない）。
+6. new_filename は以下の形式とすること（枝番は付与しない。枝番は後段のPAD側で連番採番するため、ここでは含めない）。
+   - projectが存在する場合："YYYYMMDD_クライアント名_案件名_書面名.拡張子"
+   - projectが存在しない場合："YYYYMMDD_クライアント名_書面名.拡張子"
 7. 出力は必ずJSON形式のみとし、説明文・前置き・Markdown記法（\`\`\`等）を一切含めないこと。
 
 【出力スキーマ】
 {
   "major": string,
   "middle": string,
-  "minor": string,
+  "client": string,
   "project": string,
-  "is_new_project": boolean,
+  "is_new_client": boolean,
   "date": string,
   "doc_type": string,
   "title": string,
