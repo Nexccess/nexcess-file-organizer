@@ -13,10 +13,11 @@
 //   "modifiedDate": "2026-07-10",      // ファイル更新日時（YYYY-MM-DD）
 //   "mimeType": "application/pdf",     // 画像/音声はマルチモーダル送信、文書はテキスト抽出済みを想定
 //   "textContent": "抽出済みテキスト（PDF/Word/Excel等、先頭2000文字程度）",
-//   "base64Content": "画像/音声の場合のみ。base64エンコード済みデータ",
-//   "projectMaster": { ...案件マスタJSON... },
-//   "folderMaster": { ...フォルダ構造マスタJSON... }
+//   "base64Content": "画像/音声の場合のみ。base64エンコード済みデータ"
 // }
+// ※ 案件マスタ・フォルダマスタはPADから送信させず、このリポジトリ直下の
+//    project-master.json / folder-master.json をサーバー側で直接読み込む。
+//    （PAD側の設定を簡素化するため）
 //
 // レスポンス形式（v2.0：クライアント＞案件の親子構造に対応）:
 // {
@@ -35,6 +36,10 @@
 
 const GEMINI_MODEL = "gemini-2.5-flash-lite";
 const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+
+// リポジトリ直下に配置したマスタファイルを直接読み込む
+const projectMaster = require("../project-master.json");
+const folderMaster = require("../folder-master.json");
 
 const SYSTEM_PROMPT = `あなたはファイル分類の専門エンジンです。以下の制約に厳格に従ってください。
 
@@ -115,8 +120,6 @@ module.exports = async (req, res) => {
       mimeType,
       textContent,
       base64Content,
-      projectMaster,
-      folderMaster,
     } = req.body || {};
 
     if (!filename) {
@@ -128,8 +131,8 @@ module.exports = async (req, res) => {
       filename,
       modifiedDate,
       textContent,
-      projectMaster: projectMaster || { projects: [] },
-      folderMaster: folderMaster || {},
+      projectMaster,
+      folderMaster,
     });
 
     // parts組み立て：画像/音声はマルチモーダルで直接添付、文書はテキストのみ
