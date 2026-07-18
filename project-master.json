@@ -1,11 +1,11 @@
 {
-  "version": "2.0",
-  "note": "クライアント＞案件の親子構造。未確定・未分類はis_new_project運用で随時追加。完成を前提としない。",
+  "version": "3.0",
+  "note": "majorはfolder-master.json記載のWindows物理フォルダ名と完全一致させること。middleは業務分類ラベル（社内管理用途のみ、フォルダ階層には使用しない）。クライアント＞案件の親子構造。未確定・未分類はis_new_client運用で随時追加。完成を前提としない。",
   "clients": [
     {
       "client": "あすか信組",
       "aliases": ["あすか信組", "あすか信用組合"],
-      "major": "経営コンサル",
+      "major": "02_コンサル案件",
       "middle": "調達コンサル",
       "projects": [
         { "id": "たんぽぽ石油", "aliases": ["たんぽぽ石油"] }
@@ -14,14 +14,14 @@
     {
       "client": "ワイズエーシー",
       "aliases": ["ワイズエーシー", "ワイズエーシー株式会社"],
-      "major": "経営コンサル",
+      "major": "02_コンサル案件",
       "middle": "調達コンサル",
       "projects": []
     },
     {
       "client": "LCグループ",
       "aliases": ["LCグループ", "LC Holdings"],
-      "major": "経営コンサル",
+      "major": "02_コンサル案件",
       "middle": "企業再生",
       "projects": [
         { "id": "ゼーレマン", "aliases": ["ゼーレマン"] },
@@ -35,49 +35,49 @@
     {
       "client": "エムスリー",
       "aliases": ["エムスリー", "M3", "株式会社エムスリー"],
-      "major": "経営コンサル",
+      "major": "02_コンサル案件",
       "middle": "ハンズオン型",
       "projects": []
     },
     {
       "client": "Hakko",
       "aliases": ["Hakko", "HAKKO", "八光", "八光株式会社"],
-      "major": "訴訟関連",
+      "major": "03_訴訟係争",
       "middle": "自社",
       "projects": []
     },
     {
       "client": "Key",
       "aliases": ["Key", "KEY"],
-      "major": "訴訟関連",
+      "major": "03_訴訟係争",
       "middle": "自社（旧社）",
       "projects": []
     },
     {
       "client": "茂原",
       "aliases": ["茂原"],
-      "major": "訴訟関連",
+      "major": "03_訴訟係争",
       "middle": "コンサル先案件",
       "projects": []
     },
     {
       "client": "Path-Flow",
       "aliases": ["Path-Flow", "PathFlow", "パスフロー", "sensei.pathflow.org"],
-      "major": "自社プロダクト",
+      "major": "01_自社事業",
       "middle": "Web関連",
       "projects": []
     },
     {
       "client": "KUMIKAE",
       "aliases": ["KUMIKAE", "組換", "くみかえ"],
-      "major": "自社プロダクト",
+      "major": "01_自社事業",
       "middle": "Web関連",
       "projects": []
     },
     {
       "client": "YGIC",
       "aliases": ["YGIC", "横浜"],
-      "major": "自社プロダクト",
+      "major": "01_自社事業",
       "middle": "シェアオフィス事業",
       "projects": []
     }
